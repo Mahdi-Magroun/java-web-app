@@ -26,8 +26,9 @@ pipeline {
             steps {
                 echo 'deploying ....' 
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                  sh 'docker build -t mahdi0188:myjava_app .' 
-		    sh 'docker push  mahdi0188:myjava_app .'
+                  sh 'docker build -t mahdi0188/myjava_app:latest .' 
+		    sh 'docker push  mahdi0188/myjava_app:latest .'
+		    sh 'docker logout'
             }
     }
         
