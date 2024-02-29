@@ -14,16 +14,17 @@ pipeline {
                 echo 'testing .... ' 
                   sh 'mvn test' 
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                }
+            }
     }
          stage('deploy') {
             steps {
                 echo 'deploying ....' 
             }
     }
-        post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
-            }
+        
     }
 }
