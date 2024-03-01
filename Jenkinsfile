@@ -19,14 +19,17 @@ pipeline {
             }
             steps {
             echo "building ...."
-            sh './mvnw clean package'
+            sh './mvnw clean package -DskipTests'
             }
         
         }
         stage('package') {
+            agent{
+               
             steps {
-               echo 'pushing to docker hub ....'  
-               sh 'ls -la'  
+               echo 'packaging to docker hub ....'  
+               sh "docker build -t mahdi0188/spring-boot-docker ."
+
             }
     }
     stage('test') {
@@ -44,13 +47,7 @@ pipeline {
           
              steps{
                    echo 'deploying ....' 
-           /* steps {
-                echo 'deploying ....' 
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                  sh 'docker build -t mahdi0188/myjava_app:latest .' 
-            sh 'docker push  mahdi0188/myjava_app:latest '
-            sh 'docker logout'
-            */
+        
             }
     }
         
