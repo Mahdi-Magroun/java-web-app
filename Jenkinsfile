@@ -26,6 +26,7 @@ pipeline {
         stage('package') {
             steps {
                echo 'pushing to docker hub ....'  
+               sh 'ls -la'  
             }
     }
     stage('test') {
