@@ -19,7 +19,7 @@ pipeline {
             }
             steps {
             echo "building ...."
-            sh 'mvn clean package'
+            sh './mvnw clean package'
             }
         
         }
