@@ -1,34 +1,51 @@
 
 pipeline {
-    agent any
+    agent none
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub-mahdi-magroun')
 	}
     stages {
         stage('build') {
+            agent{
+                docker{
+                    image 'eclipse-temurin:11-jdk-alpine'
+                    args '''
+                    -v ./:/app
+                    -w /app
+                    '''
+                }
+            }
             steps {
             echo "building ...."
             sh 'mvn -B -DskipTests clean package' 
             }
         }
-        stage('test') {
+        stage('package') {
             steps {
-                echo 'testing .... ' 
-                  sh 'mvn test' 
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
+              
             }
     }
-         stage('deploy') {
+    stage('test') {
             steps {
+              
+            }
+    }
+
+        stage("push"){
+            steps{
+                  echo 'pushing to docker hub ....'  
+            }
+        }
+         stage('deploy') {
+             echo 'deploying ....' 
+             steps{
+           /* steps {
                 echo 'deploying ....' 
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                   sh 'docker build -t mahdi0188/myjava_app:latest .' 
 		    sh 'docker push  mahdi0188/myjava_app:latest '
 		    sh 'docker logout'
+            */
             }
     }
         
