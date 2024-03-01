@@ -5,7 +5,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub-mahdi-magroun')
     }
     stages {
-        stage('test') {
+        stage('test && build') {
             agent{
                 docker{
                     image 'eclipse-temurin:11-jdk-alpine'
@@ -19,7 +19,7 @@ pipeline {
             }
             steps {
             echo "building ...."
-            sh './mvnw clean package '
+            sh './mvnw clean package  '
             }
         
         }
@@ -30,19 +30,6 @@ pipeline {
                sh "docker build -t mahdi0188/spring-boot-docker:latest ."
             }
     }
-    stage('test') {
-        agent{
-            docker{
-                image "mmahdi0188/spring-boot-docker:latest"
-                reuseNode true
-            }
-        }
-            steps {
-               echo 'testing to docker hub ....'  
-               //test
-            }
-    }
-
         stage("push"){
             steps{
                   echo 'pushing to docker hub ....'  
