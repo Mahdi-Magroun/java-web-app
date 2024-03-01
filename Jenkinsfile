@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
             echo "building ...."
-            sh 'mvn -B -DskipTests clean package' 
+            sh './mvnw -B -DskipTests clean package' 
             }
         }
         stage('package') {
