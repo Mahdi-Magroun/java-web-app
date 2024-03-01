@@ -22,12 +22,12 @@ pipeline {
         }
         stage('package') {
             steps {
-              
+               echo 'pushing to docker hub ....'  
             }
     }
     stage('test') {
             steps {
-              
+               echo 'pushing to docker hub ....'  
             }
     }
 
@@ -37,8 +37,9 @@ pipeline {
             }
         }
          stage('deploy') {
-             echo 'deploying ....' 
+          
              steps{
+                   echo 'deploying ....' 
            /* steps {
                 echo 'deploying ....' 
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
