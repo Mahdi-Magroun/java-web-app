@@ -24,7 +24,7 @@ pipeline {
         
         }
         stage('package') {
-            agent{
+            
                
             steps {
                echo 'packaging to docker hub ....'  
