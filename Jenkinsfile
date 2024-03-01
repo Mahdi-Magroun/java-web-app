@@ -27,13 +27,13 @@ pipeline {
             
             steps {
                echo 'packaging to docker hub ....'  
-               sh "docker build -t mahdi0188/spring-boot-docker ."
+               sh "docker build -t mahdi0188/spring-boot-docker:latest ."
             }
     }
     stage('test') {
         agent{
             docker{
-                image "mahdi0188/spring-boot-docker"
+                image "mmahdi0188/spring-boot-docker:latest"
                 reuseNode true
             }
         }
@@ -48,7 +48,7 @@ pipeline {
                   echo 'pushing to docker hub ....'  
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-mahdi-magroun', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "docker login -u $USERNAME -p $PASSWORD"
-                        sh "docker push mahdi0188/spring-boot-docker"
+                        sh "docker push mahdi0188/spring-boot-docker:latest"
                     }
             }
         }
