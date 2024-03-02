@@ -5,7 +5,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub-mahdi-magroun')
     }
     stages {
-        /*stage('test && build') {
+    /*    stage('test && build') {
             agent{
                 docker{
                     image 'eclipse-temurin:11-jdk-alpine'
@@ -23,7 +23,7 @@ pipeline {
             }
         
         }
-      /*  stage('package') {
+       stage('package') {
             
             steps {
                echo 'packaging to docker hub ....'  
@@ -31,7 +31,7 @@ pipeline {
             }
             
     }
-       /* stage("push"){
+        stage("push"){
             steps{
                   echo 'pushing to docker hub ....'  
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-mahdi-magroun', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -45,13 +45,20 @@ pipeline {
              steps{
                 
 
-
+                   withCredentials([usernamePassword(credentialsId: 'dockerhub-mahdi-magroun', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                   sshPublisher(publishers: [sshPublisherDesc(configName: 'cha3nouna',
                     verbose: true,
                     transfers: [
                         sshTransfer(cleanRemote: false,
                         excludes: '',
-                        execCommand: 'ls -la; uname -a',
+                        execCommand: ''''
+                            docker stop spring-boot-docker  || true ;
+                            docker rm  spring-boot-docker  || true;
+                            docker login -u $USERNAME -p $PASSWORD ;
+                            docker pull mahdi0188/spring-boot-docker:latest ;
+                            docker run -d  --name spring-boot-docker mahdi0188/spring-boot-docker:latest
+
+                        ''',
                         
                         )
                     ],
@@ -61,7 +68,7 @@ pipeline {
                  
                      
 
-
+                   }
 
 
          
