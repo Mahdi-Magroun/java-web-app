@@ -52,6 +52,7 @@ pipeline {
                     ssh  useradm@192.168.56.21 "
                     ls -la ;
                     ip address ;
+
                     "
 
 
