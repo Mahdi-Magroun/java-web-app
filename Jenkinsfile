@@ -23,14 +23,15 @@ pipeline {
             }
         
         }
-        stage('package') {
+      /*  stage('package') {
             
             steps {
                echo 'packaging to docker hub ....'  
                sh "docker build -t mahdi0188/spring-boot-docker:latest ."
             }
+            
     }
-        stage("push"){
+       /* stage("push"){
             steps{
                   echo 'pushing to docker hub ....'  
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-mahdi-magroun', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -38,17 +39,16 @@ pipeline {
                         sh "docker push mahdi0188/spring-boot-docker:latest"
                     }
             }
-        }
+        }*/
          stage('deploy') {
 
              steps{
-                    sshagent(['deployment_server_key']) {
-                        sh "ssh -o StrictHostKeyChecking=no useradm@192.168.56.21"
-                        sh "docker pull mahdi0188/spring-boot-docker:latest"
-                        
-                    }
+                  
 
                    echo 'deploying ....' 
+                    sh "sshpass -p '123' ssh useradm@192.168.56.21 "
+                    sh "ls -la"
+                    sh "ip address"
         
             }
     }
