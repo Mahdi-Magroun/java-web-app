@@ -5,7 +5,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub-mahdi-magroun')
     }
     stages {
-    /*    stage('test && build') {
+       stage('test && build') {
             agent{
                 docker{
                     image 'eclipse-temurin:11-jdk-alpine'
@@ -39,7 +39,7 @@ pipeline {
                         sh "docker push mahdi0188/spring-boot-docker:latest"
                     }
             }
-        }*/
+        }
          stage('deploy') {
 
              steps{
