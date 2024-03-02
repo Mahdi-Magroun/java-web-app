@@ -51,7 +51,7 @@ pipeline {
                     transfers: [
                         sshTransfer(cleanRemote: false,
                         excludes: '',
-                        execCommand: ''''
+                        execCommand: '''
                             docker stop spring-boot-docker  || true ;
                             docker rm  spring-boot-docker  || true;
                             docker login -u $USERNAME -p $PASSWORD ;
