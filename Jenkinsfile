@@ -49,7 +49,7 @@ pipeline {
 
                     sh '''
 
-                    ssh -i $MY_SSH_KEY useradm@192.168.56.21 "
+                    ssh  useradm@192.168.56.21 "
                     ls -la ;
                     ip address ;
                     "
