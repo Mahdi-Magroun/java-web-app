@@ -44,11 +44,16 @@ pipeline {
 
              steps{
                   
+                sshScript remote: [
+                    host: '192.168.56.21',
+                    user: 'useradm',
+                    password: '123'
+                ], script: [
+                    "ls -la",
+                    "ip address"
+                ]
+            }
 
-                   echo 'deploying ....' 
-                    sh "sshpass -p '123' ssh -T useradm@192.168.56.21 "
-                    sh "ls -la"
-                    sh "ip address"
         
             }
     }
