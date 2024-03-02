@@ -47,8 +47,14 @@ pipeline {
 
 
                   sshPublisher(publishers: [sshPublisherDesc(configName: 'cha3nouna',
-                  execCommand: 'ls -la',
                  
+                    transfers: [
+                        sshTransfer(cleanRemote: false,
+                        excludes: '',
+                        execCommand: 'ls -la; uname -a',
+                        
+                        )
+                    ],
                   )
                   ])
                    
