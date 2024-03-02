@@ -56,7 +56,7 @@ pipeline {
                             docker rm  spring-boot-docker  || true;
                             docker login -u $USERNAME -p $PASSWORD ;
                             docker pull mahdi0188/spring-boot-docker:latest ;
-                            docker run -d  --name spring-boot-docker mahdi0188/spring-boot-docker:latest
+                            docker run -d -p 8080:8080  --name spring-boot-docker mahdi0188/spring-boot-docker:latest
 
                         ''',
                         
