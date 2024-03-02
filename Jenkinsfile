@@ -40,8 +40,14 @@ pipeline {
             }
         }
          stage('deploy') {
-          
+
              steps{
+                    sshagent(['deployment_server_key']) {
+                        sh "ssh -o StrictHostKeyChecking=no useradm@192.168.56.21"
+                        sh "docker pull mahdi0188/spring-boot-docker:latest"
+                        
+                    }
+
                    echo 'deploying ....' 
         
             }
