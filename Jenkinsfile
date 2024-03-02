@@ -47,7 +47,7 @@ pipeline {
 
 
                   sshPublisher(publishers: [sshPublisherDesc(configName: 'cha3nouna',
-                 
+                    verbose: true,
                     transfers: [
                         sshTransfer(cleanRemote: false,
                         excludes: '',
