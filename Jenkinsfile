@@ -43,15 +43,22 @@ pipeline {
          stage('deploy') {
 
              steps{
-                  
-                sshScript remote: [
-                    host: '192.168.56.21',
-                    user: 'useradm',
-                    password: '123'
-                ], script: [
-                    "ls -la",
-                    "ip address"
-                ]
+               {
+
+                withCredentials([sshUserPrivateKey(credentialsId: 'deployment_server_key', keyFileVariable: 'MY_SSH_KEY')]) {
+
+                    sh '''
+
+                    ssh -i $MY_SSH_KEY useradm@192.168.56.21 "
+                    ls -la ;
+                    ip address ;
+                    "
+
+
+                    '''
+
+                }
+
             }
 
         
