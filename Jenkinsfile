@@ -43,22 +43,24 @@ pipeline {
          stage('deploy') {
 
              steps{
-               
-
-                withCredentials([sshUserPrivateKey(credentialsId: 'deployment_server_key', keyFileVariable: 'MY_SSH_KEY')]) {
-
-                    sh '''
-
-                    ssh  useradm@192.168.56.21 "
-                    ls -la ;
-                    ip address ;
-
-                    "
+                
 
 
-                    '''
+                  sshPublisher(publishers: [sshPublisherDesc(configName: 'cha3nouna',
+                  execCommand: 'ls -la',
+                  execCommand: 'docker pull mahdi0188/spring-boot-docker:latest',
+                  )
+                  ])
+                   
+                 
+                     
 
-                }
+
+
+
+         
+
+                
 
             
 
