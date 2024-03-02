@@ -48,7 +48,7 @@ pipeline {
 
                   sshPublisher(publishers: [sshPublisherDesc(configName: 'cha3nouna',
                   execCommand: 'ls -la',
-                  execCommand: 'docker pull mahdi0188/spring-boot-docker:latest',
+                 
                   )
                   ])
                    
